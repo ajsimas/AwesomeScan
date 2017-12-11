@@ -1,4 +1,7 @@
-﻿#CCleaner
+﻿#AwesomeScan
+#Shortcut: https://goo.gl/1HJ54Q
+
+#CCleaner
 
 $CCleanerInstallerURL = "http://download.piriform.com/ccsetup537.exe"
 $CCleanerInstallerPath = "C:\Windows\Temp\ccsetup537.exe"
