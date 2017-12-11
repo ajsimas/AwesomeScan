@@ -12,17 +12,19 @@ If(!(Test-Path 'C:\Program Files\CCleaner')){
 
     Start-Process -FilePath "C:\Windows\Temp\ccsetup537.exe" -ArgumentList /S
 
-    Start-Sleep 30
-
-
+    While(!(Test-Path 'C:\Program Files\CCleaner')){
+        
+    }
 }
-
-$CCleanerIni = New-Object System.Net.WebClient
-$CCleanerIni.DownloadFile($CCleanerIniURL, $CCleanerIniPath)
 
 else{
     Write-Output "Already Installed"
 }
+
+Start-Sleep 5
+
+$CCleanerIni = New-Object System.Net.WebClient
+$CCleanerIni.DownloadFile($CCleanerIniURL, $CCleanerIniPath)
 
 #Update CCleaner
 
