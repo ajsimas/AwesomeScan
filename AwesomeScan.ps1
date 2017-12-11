@@ -14,9 +14,11 @@ If(!(Test-Path 'C:\Program Files\CCleaner')){
 
     Start-Sleep 30
 
-    $CCleanerIni = New-Object System.Net.WebClient
-    $CCleanerIni.DownloadFile($CCleanerIniURL, $CCleanerIniPath)
+
 }
+
+$CCleanerIni = New-Object System.Net.WebClient
+$CCleanerIni.DownloadFile($CCleanerIniURL, $CCleanerIniPath)
 
 else{
     Write-Output "Already Installed"
