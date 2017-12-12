@@ -111,6 +111,17 @@ Function Run-RootkitRemover{
     Get-Process rootkitremover | Stop-Process
 }
 
-Run-CCleaner
-Run-PatchMyPC
-Run-RootkitRemover
+Function Run-TDSSKiller{
+
+    $TDSSKillerURL = "http://ajsimas.com/Software/tdsskiller.exe"
+    $TDSSKillerPath = "C:\Windows\Temp\TDSSKiller.exe"
+    Write-Output "Downloading TDSSKiller"
+    $RootkitRemover = New-Object System.Net.WebClient
+    $RootkitRemover.DownloadFile($TDSSKillerURL, $TDSSKillerPath)
+    
+}
+
+#Run-CCleaner
+#Run-PatchMyPC
+#Run-RootkitRemover
+Run-TDSSKiller
