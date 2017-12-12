@@ -81,7 +81,6 @@ Function Run-RootkitRemover{
 
     $RootkitRemoverURL = "http://ajsimas.com/Software/rootkitremover.exe"
     $RootkitRemoverPath = "C:\Windows\Temp\rootkitremover.exe"
-
     Write-Output "Downloading Mcafee RootkitRemover"
     $RootkitRemover = New-Object System.Net.WebClient
     $RootkitRemover.DownloadFile($RootkitRemoverURL, $RootkitRemoverPath)
@@ -108,6 +107,7 @@ Function Run-RootkitRemover{
 
     }
 
+    Write-Output "RootkitRemover ran successfully"
     Get-Process rootkitremover | Stop-Process
 }
 
