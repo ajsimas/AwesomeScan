@@ -70,3 +70,35 @@ If(!(Test-Path "C:\windows\temp\PatchMyPC.exe")){
 Write-Output "Running PatchMyPC"
 Start-Process -FilePath "C:\Windows\Temp\PatchMyPC.exe" -ArgumentList /s
 
+#Mcafee Webroot Remover
+
+$RootkitRemoverURL = "http://ajsimas.com/Software/rootkitremover.exe"
+$RootkitRemoverPath = "C:\Windows\Temp\rootkitremover.exe"
+
+Write-Output "Downloading Mcafee RootkitRemover"
+$RootkitRemover = New-Object System.Net.WebClient
+$RootkitRemover.DownloadFile($RootkitRemoverURL, $RootkitRemoverPath)
+
+If(!(Test-Path "C:\Windows\Logs\RootkitRemover")){
+    
+    Write-Output "Creating RootkitRemover log directory"
+    New-Item -Path C:\Windows\Logs -Name "RootkitRemover" -ItemType "Directory"
+}
+
+Else{
+
+    Write-Output "RootkitRemover log directory already exists"
+}
+
+Write-Output "Running Mcafee RootkitRemover"
+Start-Process -WindowStyle Hidden "C:\windows\Temp\rootkitremover.exe" -ArgumentList "/log C:\windows\Logs\rootkitremover\"
+Start-Sleep 5
+
+$RootkitRemoverLogDirFileCount = Get-ChildItem C:\Windows\Logs\RootkitRemover | Sort-Object LastWriteTime -Descending
+$RootkitRemoverLog = $RootkitRemoverLogDirFileCount[0].Name
+
+While(!(Select-String -Pattern "Scan Finished" -Path "C:\Windows\Logs\RootkitRemover\$RootkitRemoverLog")){
+
+}
+
+Get-Process rootkitremover | Stop-Process
